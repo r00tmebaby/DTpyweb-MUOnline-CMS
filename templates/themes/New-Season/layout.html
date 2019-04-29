@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <![endif]-->
+    <title>Mu Online New Season Website HTML Template</title>
+    {% include header %}
+    <link href="/static/themes-media/New-Season/css/css-reset.css" rel="stylesheet">
+    <link href="/static/themes-media/New-Season/css/style.css" rel="stylesheet">
+    <link href="/static/themes-media/New-Season/css/timer-style.css" rel="stylesheet">
+    <script src="/static/themes-media/New-Season/js/jquery-2.1.4.min.js"></script>
+    <script src="/static/themes-media/New-Season/js/countdown.js"></script>
+    <script src="/static/themes-media/New-Season/js/slider.js"></script>
+</head>
+{% if error %}
+    <p class='alert alert-error'><strong>Error:</strong> {{ error }}
+{% endif %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <ul class=flashes>
+            {% for category, message in messages %}
+                <li class="alert alert-{{ category }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
+{% if theme_switch_form %}
+    <div class="theme-switch">
+        <form method="post" action="">
+            <select name="theme" id="changetheme">
+                {% for themes in theme_switch_form %}
+                    <option value="{{ themes }}">{{ themes }}</option>
+                {% endfor %}
+            </select>
+        </form>
+    </div>
+    <script>
+        localStorage.setItem("themeselect", "{{ session['theme'] }}");
+        $('#changetheme').find('option').each(function (i, e) {
+            if ($(e).val() == localStorage.getItem("themeselect")) {
+                $('#changetheme').prop('selectedIndex', i);
+            }
+        });
+        $(function () {
+            $('#changetheme').change(function () {
+                this.form.submit();
+            });
+        });
+    </script>
+{% endif %}
+<body>
+<div class="wrapper">
+
+    <header class="header">
+        <div class="menu">
+            <ul id="top-menu">
+                <li class="active"><a href="/home">News</a></li>
+                <li><a href="/register">Registration</a></li>
+                <li><a href="/download">Files</a></li>
+                <li><a href="/rankings">Rankings</a></li>
+                <li><a href="/rules">Rules</a></li>
+                <li><a href="/about">About</a>
+                    <ul>
+                        <li><a href="#">Guides 1</a></li>
+                        <li><a href="#">Guides 2</a></li>
+                        <li><a href="#">Guides 3</a></li>
+                        <li><a href="#">Guides 4</a></li>
+                    </ul>
+                </li>
+                <li><a href="/about">About</a></li>
+            </ul>
+        </div><!-- menu -->
+        <div class="timer">
+            <span class="s-start">PRIME SERVER X999 START IN</span>
+            <div id="CDT"></div>
+        </div><!-- timer -->
+        <div class="logo">
+            <a href="https://darksteam.net/threads/dtpyweb.24394/"></a>
+        </div><!-- logo -->
+    </header><!-- .header-->
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="dowload-button">
+                <a href="#"><span>DOWNLOAD</span> Game Client 2.5 GB</a>
+            </div><!-- dowload-button -->
+            <div class="server-block">
+                <div class="server-n">
+                    <span>Online</span>
+                    X10000
+                </div>
+                <div class="server-progress">
+                    <div class="progress-bar" style="width: 70%;">
+                    </div>
+                </div>
+                <div class="online-n">
+                    <span>Online: 3120</span>
+                    Activ In 24H: 4500
+                </div>
+            </div><!-- server-block -->
+            <div class="soc-block">
+                <span><a href="#" target="_blank" class="fb"></a> <a href="#" target="_blank" class="yt"></a></span>
+            </div><!-- soc-block -->
+        </aside>
+        <div class="slider">
+            <div class="next"></div>
+            <div class="prev"></div>
+            <div class="slides">
+                <div class="slide active">
+                    <img src="/static/themes-media/New-Season/images/slider-img.jpg" alt="">
+                    <div>Server have moved to new hosting...</div>
+                </div>
+                <div class="slide">
+                    <img src="/static/themes-media/New-Season/images/slider-img.jpg" alt="">
+                    <div>A simple modern MU Online Website template in a flat style an excellent solution for your
+                        website server or news website about MU online game.
+                    </div>
+                </div>
+                <div class="slide">
+                    <img src="/static/themes-media/New-Season/images/slider-img.jpg" alt="">
+                    <div>Server have moved to new hosting...</div>
+                </div>
+            </div>
+            <div class="navigation">
+            </div>
+        </div><!-- slider-block -->
+    </div><!-- container -->
+    <div class="container main-container">
+        <aside class="sidebar">
+
+            <div class="sidebar-block login-block">
+                {% if not session['username'] %}
+                    <div class="sidebar-title login-title">
+                        <span>Account Panel</span>
+                    </div>
+                    <div class="sidebar-block-p">
+                        <form method="post" action="">
+                            <p class="login in"><input type="text" name="login_username" placeholder="USERNAME"></p>
+                            <p class="pass in"><input type="password" name="login_password" placeholder="PASSWORD"></p>
+                            <div class="login-links">
+                                <button class="button-red">LOGIN</button>
+                                <a href="#">Create a new account</a> <br>
+                                <a href="#">Lost your password?</a>
+                            </div>
+                        </form>
+                    </div>
+                {% else %}
+                    <div class="sidebar-title login-title">
+                        <span>Wellcome {{ session['username'] }}</span>
+                    </div>
+                    <div class="sidebar-block-p">
+                        <ul class="account-menu">
+                            <li><i class="fas fa-user-alt"></i> <a href="my-account">Account</a></li>
+                            <li><i class="fas fa-user-edit"></i> <a href="my-characters">Characters</a></li>
+                            <li><i class="fas fa-file-invoice-dollar"></i> <a href="vip-modules">Vip Modules</a></li>
+                            <li><i class="fas fa-dollar-sign"></i><a href="buy-credits">Buy Credits</a></li>
+                            <li><i class="fas fa-shopping-cart"></i> <a href="my-market">Market</a></li>
+                            <li><i class="fas fa-money-bill"></i> <a href="my-auction">Auction</a></li>
+                            <li><i class="fas fa-sign-out-alt"></i> <a href="logout">Logout</a></li>
+                        </ul>
+                    </div>
+                {% endif %}
+            </div><!-- sidebar-block -->
+            <div class="sidebar-block">
+                <div class="sidebar-title player-top">
+                    <span>Player Top</span>
+                </div>
+                <div class="player-block player-n sidebar-block-p">
+                    <span class="number">#</span> <span class="name" title="Nickname">Name</span> <span
+                        class="lvl">LvL</span> <span class="res">Res</span>
+                </div>
+                {% for tops in top10 %}
+                    <a href="userinfo-{{ tops[1] }}" class="player-block player-t">
+                        <span class="number">{{ loop.index }}</span> <span class="name"
+                                                                           title="{{ tops[1] }}">{{ tops[1] }}</span>
+                        <span class="lvl">{{ tops[2] }}</span> <span class="res">{{ tops[29] }}</span>
+                    </a>
+                {% endfor %}
+
+            </div><!-- sidebar-block -->
+            <div class="sidebar-block">
+                <div class="sidebar-title forum-title">
+                    <a href="#">Visit Forum</a>
+                    <span>Forum</span>
+                </div>
+                <a href="#" class="forum">
+                    <span class="number">1. </span> <span class="ava"><img
+                        src="/static/themes-media/New-Season/images/forum-ava-1.jpg" alt=""></span> <span
+                        class="text"><b>For a long time now for a long time now</b> By Ashko, Today at 12:03</span>
+                    <span class="comm"><i class="comm-icon"></i>10</span>
+                </a>
+                <a href="#" class="forum">
+                    <span class="number">2. </span> <span class="ava"><img
+                        src="/static/themes-media/New-Season/images/forum-ava-2.jpg" alt=""></span> <span
+                        class="text"><b>For a long time now for a long time now</b> By VeryLognNickName, Today at 12:03</span>
+                    <span class="comm"><i class="comm-icon"></i>10</span>
+                </a>
+                <a href="#" class="forum">
+                    <span class="number">3. </span> <span class="ava"><img
+                        src="/static/themes-media/New-Season/images/forum-ava-1.jpg" alt=""></span> <span
+                        class="text"><b>For a long time now for a long time now</b> By Ashko, Today at 12:03</span>
+                    <span class="comm"><i class="comm-icon"></i>0</span>
+                </a>
+                <a href="#" class="forum">
+                    <span class="number">4. </span> <span class="ava"><img
+                        src="/static/themes-media/New-Season/images/forum-ava-2.jpg" alt=""></span> <span
+                        class="text"><b>For a long time now for a long time now</b> By Ashko, Today at 12:03</span>
+                    <span class="comm"><i class="comm-icon"></i>1</span>
+                </a>
+                <a href="#" class="forum">
+                    <span class="number">5. </span> <span class="ava"><img
+                        src="/static/themes-media/New-Season/images/forum-ava-1.jpg" alt=""></span> <span
+                        class="text"><b>For a long time now for a long time now</b> By Ashko, Today at 12:03</span>
+                    <span class="comm"><i class="comm-icon"></i>8</span>
+                </a>
+            </div><!-- sidebar-block -->
+            <div class="join-us-block sidebar-block">
+                <a href="#" class="join-us">
+                    <span>JOIN US NOW!</span>
+                </a>
+                <div class="carousel-block">
+                    <div id="carousel" class="carousel">
+                        <button class="arrow prev"></button>
+                        <div class="gallery">
+                            <ul class="images">
+                                <li><a href="#"><img src="/static/themes-media/New-Season/images/carousel-img-1.jpg"
+                                                     alt=""></a></li>
+                                <li><a href="#"><img src="/static/themes-media/New-Season/images/carousel-img-2.jpg"
+                                                     alt=""></a></li>
+                                <li><a href="#"><img src="/static/themes-media/New-Season/images/carousel-img-3.jpg"
+                                                     alt=""></a></li>
+                                <li><a href="#"><img src="/static/themes-media/New-Season/images/carousel-img-1.jpg"
+                                                     alt=""></a></li>
+                                <li><a href="#"><img src="/static/themes-media/New-Season/images/carousel-img-2.jpg"
+                                                     alt=""></a></li>
+                                <li><a href="#"><img src="/static/themes-media/New-Season/images/carousel-img-3.jpg"
+                                                     alt=""></a></li>
+                                <li><a href="#"><img src="/static/themes-media/New-Season/images/carousel-img-1.jpg"
+                                                     alt=""></a></li>
+                                <li><a href="#"><img src="/static/themes-media/New-Season/images/carousel-img-2.jpg"
+                                                     alt=""></a></li>
+                                <li><a href="#"><img src="/static/themes-media/New-Season/images/carousel-img-3.jpg"
+                                                     alt=""></a></li>
+                                <li><a href="#"><img src="/static/themes-media/New-Season/images/carousel-img-2.jpg"
+                                                     alt=""></a></li>
+                                <li><a href="#"><img src="/static/themes-media/New-Season/images/carousel-img-3.jpg"
+                                                     alt=""></a></li>
+                                <li><a href="#"><img src="/static/themes-media/New-Season/images/carousel-img-1.jpg"
+                                                     alt=""></a></li>
+                                <li><a href="#"><img src="/static/themes-media/New-Season/images/carousel-img-2.jpg"
+                                                     alt=""></a></li>
+                                <li><a href="#"><img src="/static/themes-media/New-Season/images/carousel-img-3.jpg"
+                                                     alt=""></a></li>
+                            </ul>
+                        </div>
+                        <button class="arrow next"></button>
+                    </div>
+                </div><!-- carousel-block -->
+            </div><!-- join-us-block -->
+        </aside><!-- .sidebar -->
+        <main class="content">
+            {% block content %}
+            {% endblock content %}
+        </main><!-- content -->
+    </div><!-- container -->
+
+    <footer class="footer">
+        <div class="top-block">
+            <a id="toTop"></a>
+        </div><!-- top-block -->
+        <div class="bottom-menu">
+            <ul>
+                <li>NEWS</li>
+                <li><a href="#">- Overview</a></li>
+                <li><a href="#">- Setting</a></li>
+                <li><a href="#">- Starter Guide</a></li>
+            </ul>
+            <ul>
+                <li>GUILDE</li>
+                <li><a href="#">- Overview</a></li>
+                <li><a href="#">- Setting</a></li>
+                <li><a href="#">- Starter Guide</a></li>
+            </ul>
+            <ul>
+                <li>COMMUNITY</li>
+                <li><a href="#">- Overview</a></li>
+                <li><a href="#">- Setting</a></li>
+                <li><a href="#">- Starter Guide</a></li>
+            </ul>
+            <ul>
+                <li>MEDIA</li>
+                <li><a href="#">- Overview</a></li>
+                <li><a href="#">- Setting</a></li>
+                <li><a href="#">- Starter Guide</a></li>
+            </ul>
+            <ul>
+                <li>SUPPORT</li>
+                <li><a href="#">- Overview</a></li>
+                <li><a href="#">- Setting</a></li>
+                <li><a href="#">- Starter Guide</a></li>
+            </ul>
+        </div><!-- bottom-menu -->
+        <div class="copyright">
+            {{ author }}
+        </div>
+    </footer><!-- .footer -->
+
+</div><!-- .wrapper -->
+<script>
+    var width = 120;
+    var count = 3;
+
+    var carousel = document.getElementById('carousel');
+    var list = carousel.querySelector('ul');
+    var listElems = carousel.querySelectorAll('li');
+
+    var position = 0;
+
+    carousel.querySelector('.prev').onclick = function () {
+        position = Math.min(position + width * count, 0)
+        list.style.marginLeft = position + 'px';
+    };
+
+    carousel.querySelector('.next').onclick = function () {
+        position = Math.max(position - width * count, -width * (listElems.length - count));
+        list.style.marginLeft = position + 'px';
+    };
+</script>
+<script>
+    $(function () {
+        $(window).scroll(function () {
+            if ($(this).scrollTop() != 0) {
+                $('#toTop').fadeIn();
+            } else {
+                $('#toTop').fadeOut();
+            }
+        });
+        $('#toTop').click(function () {
+            $('body,html').animate({scrollTop: 0}, 800);
+        });
+    });
+</script>
+</body>
+
+/static/themes-media/New-Season/
+</html>

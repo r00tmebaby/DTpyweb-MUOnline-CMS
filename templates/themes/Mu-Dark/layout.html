@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include header %}
+    <link href="/static/themes-media/Mu-Dark/css/css-reset.css" rel="stylesheet">
+    <link href="/static/themes-media/Mu-Dark/css/style.css" rel="stylesheet">
+    <script>
+        $(window).load(function () {
+            $("body").removeClass("load");
+        });
+    </script>
+</head>
+{% if error %}
+    <p class='alert alert-error'><strong>Error:</strong> {{ error }}
+{% endif %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <ul class=flashes>
+            {% for category, message in messages %}
+                <li class="alert alert-{{ category }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
+<body>
+{% if theme_switch_form %}
+    <div class="theme-switch">
+        <form method="post" action="">
+            <select name="theme" id="changetheme">
+                {% for themes in theme_switch_form %}
+                    <option value="{{ themes }}">{{ themes }}</option>
+                {% endfor %}
+            </select>
+        </form>
+    </div>
+    <script>
+        localStorage.setItem("themeselect", "{{ session['theme'] }}");
+        $('#changetheme').find('option').each(function (i, e) {
+            if ($(e).val() == localStorage.getItem("themeselect")) {
+                $('#changetheme').prop('selectedIndex', i);
+            }
+        });
+        $(function () {
+            $('#changetheme').change(function () {
+                this.form.submit();
+            });
+        });
+    </script>
+{% endif %}
+<div class="wrapper">
+    <header class="header">
+        <div class="logo">
+            <a href="https://darksteam.net/threads/dtpyweb.24394/"><img
+                    src="/static/themes-media/Mu-Dark/images/logo.png" alt=""></a>
+        </div><!-- logo -->
+        <div class="server-block online">
+            <p>DTpyWeb <span></span></p>
+            <div class="progress-bar-bg">
+                <div class="progress-bar" style="width:70%;">
+                </div>
+            </div>
+            <div class="server-status">
+                Online: <span>530</span>
+            </div>
+        </div>
+        <!-- Server Offline Block -->
+        <!-- <div class="server-block offline">
+            <p>NAME SERVER <span></span></p>
+            <div class="progress-bar-bg">
+                <div class="progress-bar" style="width:1%;">
+                </div>
+            </div>
+            <div class="server-status">
+                Online: <span>0</span>
+            </div>
+        </div> -->
+        <div class="bottom-block">
+            <div class="menu">
+                <ul id="top-menu">
+                    <li class="active"><a href="/home">Home</a></li>
+                    <li><a href="/download">Files</a></li>
+                    <li><a href="/rankings">Rankings</a></li>
+                    <li><a href="/register">Register</a></li>
+                    <li><a href="#">FB Group</a></li>
+                    <li><a href="/rules">Rules</a></li>
+                    <li><a href="/about">About</a></li>
+                </ul>
+            </div><!-- menu -->
+            <div class="social-block">
+                <a href="#" target="_blank" class="tw"></a>
+                <a href="#" target="_blank" class="fb"></a>
+                <a href="#" target="_blank" class="yt"></a>
+            </div><!-- social-block -->
+            <div class="language-block">
+                <a href="javascript:void(0);" tabindex="1" class="block-toggler">Language <span>(eng)</span> <img
+                        src="/static/themes-media/Mu-Dark/images/eng-icon.png" alt=""></a>
+                <ul class="hidden-block">
+                    <li><a href="#">German</a></li>
+                    <li><a href="#">French</a></li>
+                </ul>
+            </div><!-- language-block -->
+        </div><!-- bottom-block -->
+
+        <!-- animations -->
+        <div class="big-light">
+        </div>
+        <div class="small-light">
+        </div>
+        <div class="sparks sparks-1">
+        </div><!-- sparks -->
+        <div class="sparks sparks-2">
+        </div><!-- sparks -->
+        <div class="sparks sparks-3">
+        </div><!-- sparks -->
+        <!-- animations -->
+
+    </header><!-- .header-->
+
+    <div class="container">
+        <aside class="left-sidebar">
+            <div class="login-block sidebar-block">
+                {% if not session['username'] %}
+                    <div class="sidebar-title">
+                        Account Panel
+                    </div><!-- sidebar-title -->
+
+                    <form method="post">
+                        <p><input type="text" name="login_username" placeholder="Username"></p>
+                        <p><input type="text" name="login_password" placeholder="Password"></p>
+                        <div class="bottom-button">
+                            <div class="links">
+                                <p><a href="lost-password">Lost Password?</a> | <a href="register">Registration</a></p>
+
+                            </div>
+                            <input class="button login-button" type="submit" name="button" value="Login">
+                        </div>
+                    </form>
+                {% else %}
+                    <div class="fast-links sidebar-block">
+                        <div class="sidebar-title">
+                            <i class="fas fa-user fa-1x"></i> Welcome {{ session['username'] }}
+                        </div><!-- sidebar-title -->
+                        <a href="my-account">Account</a>
+                        <a href="my-characters">Characters</a>
+                        <a href="vip-modules">Vip Modules</a>
+                        <a href="buy-credits">Buy Credits</a>
+                        <a href="my-market">Market</a>
+                        <a href="my-auction">Auction</a>
+                        <a href="logout">Logout</a>
+                    </div>
+                {% endif %}
+            </div><!-- login-block -->
+            <div class="top-player-block sidebar-block">
+                <div class="sidebar-title">
+                    Player Top
+                </div><!-- sidebar-title -->
+                <div class="top-player top-block">
+                    <span>#</span> <span></span> <span>NAME</span> <span>LvL</span> <span>Res <b>GR</b></span>
+                </div>
+                {% for tops in top10 %}
+
+                    <span><a class="top-player top-block" title="{{ tops[1] }}" href="userinfo-{{ tops[1] }}"
+                             title="{{ tops[1] }}"><span> {{ loop.index }}</span><span>{{ tops[1] }}</span>
+                        <span style="margin-right:30px;text-align:right">{{ tops[2] }}</span>
+                        <span>{{ tops[29] }}</span>
+                    </a>
+
+                {% endfor %}
+                <div class="bottom-more">
+                    <span>All players</span>
+                    <a href="#" class="button">+ more</a>
+                </div>
+            </div><!-- top-player-block -->
+            <div class="top-guilds-block sidebar-block">
+                <div class="sidebar-title">
+                    Top Guilds
+                </div><!-- sidebar-title -->
+                <div class="top-guild top-block">
+                    <span>#</span> <span>NAME</span> <span>LvL</span>
+                </div>
+                <a href="#" class="top-guild top-block" title="Guild">
+                    <span>1.</span> <span>BestBoss</span> <span>15</span>
+                </a>
+                <a href="#" class="top-guild top-block" title="Guild">
+                    <span>2.</span> <span>Very_Long_Nick_Name_Very</span> <span>12</span>
+                </a>
+                <a href="#" class="top-guild top-block" title="Guild">
+                    <span>3.</span> <span>BestBoss</span> <span>10</span>
+                </a>
+                <a href="#" class="top-guild top-block" title="Guild">
+                    <span>4.</span> <span>Tinity_09</span> <span>8</span>
+                </a>
+                <a href="#" class="top-guild top-block" title="Guild">
+                    <span>5.</span> <span>SuperMan</span> <span>5</span>
+                </a>
+                <div class="bottom-more">
+                    <span>All Guilds</span>
+                    <a href="#" class="button">+ more</a>
+                </div>
+            </div><!-- top-player-block -->
+        </aside><!-- left-sidebar -->
+        <main class="content">
+            {% block content %}
+            {% endblock content %}
+        </main><!-- .content -->
+
+        <aside class="right-sidebar">
+            <div class="download-reg-block">
+                <div class="download-button right-button">
+                    <a href="download"><p>Download</p></a>
+                </div>
+                <div class="registration-button right-button">
+                    <a href="register"><p>Registraton</p> Free Registration</a>
+                </div>
+            </div><!-- download-reg-block -->
+            <div class="fast-links sidebar-block">
+                <div class="sidebar-title">
+                    Fast Links
+                </div><!-- sidebar-title -->
+                <a href="#">Item Shop</a>
+                <a href="#">Media Wallpapers</a>
+                <a href="download">Download Files</a>
+                <a href="#">Forum Community</a>
+                <a href="home">News and Events</a>
+                <a href="#">Guides and Info</a>
+            </div><!-- fast-links -->
+            <div class="vote-block sidebar-block">
+                <div class="sidebar-title">
+                    Vote For Us
+                </div><!-- sidebar-title -->
+                <div class="facebook-app">
+                    <a href="#"><img src="/static/themes-media/Mu-Dark/images/facebook-img.jpg" alt=""></a>
+                </div>
+            </div><!-- fast-links -->
+        </aside><!-- right-sidebar -->
+    </div><!-- .container-->
+
+    <footer class="footer">
+        <div class="left-footer-block">
+            <div class="f-logo">
+                <a href="https://github.com/r00tmebaby"><img src="/static/themes-media/Mu-Dark/images/f-logo.png"
+                                                             alt=""></a>
+            </div>
+        </div><!-- left-footer-block -->
+        <div class="right-footer-block">
+            <div class="f-menu">
+                <ul>
+                    <li class="active"><a href="/home">Home</a></li>
+                    <li><a href="/register">Registration</a></li>
+                    <li><a href="#">Media</a></li>
+                    <li><a href="#">Events</a></li>
+                    <li><a href="#">Community</a></li>
+                    <li><a href="/about">Support</a></li>
+                </ul>
+            </div>
+            <div class="templstock">
+                {{ author }}
+            </div>
+        </div><!-- right-footer-block -->
+    </footer><!-- .footer -->
+
+</div><!-- .wrapper -->
+<script src="/static/themes-media/Mu-Dark/js/jquery.min.js"></script>
+<script>
+    $(function () {
+        $(window).scroll(function () {
+            if ($(this).scrollTop() != 0) {
+                $('#toTop').fadeIn();
+            } else {
+                $('#toTop').fadeOut();
+            }
+        });
+        $('#toTop').click(function () {
+            $('body,html').animate({scrollTop: 0}, 800);
+        });
+    });
+</script>
+</body>
+</html>

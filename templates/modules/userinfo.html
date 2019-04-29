@@ -1,0 +1,91 @@
+{% extends theme %}
+{% block content %}
+    <div class="page-title"> {{ character }} Information</div>
+    <div class="content_new">
+
+        {% if item_image[0] %}
+            <div class="equipment left-hand" data-tippy-content="{{ item_info[0] }}">
+                <img alt="Left Hand Weapon" src="{{ item_image[0] }}">
+            </div>
+        {% endif %}
+
+        {% if item_image[1] %}
+            <div class="equipment right-hand" data-tippy-content="{{ item_info[1] }}">
+                <img alt="Right Hand Weapon" src="{{ item_image[1] }}">
+            </div>
+        {% endif %}
+
+        {% if item_image[2] %}
+            <div class="equipment helm" data-tippy-content="{{ item_info[2] }}">
+                <img alt="Helm" src="{{ item_image[2] }}">
+            </div>
+        {% endif %}
+
+        {% if item_image[3] %}
+            <div class="equipment armor" data-tippy-content="{{ item_info[3] }}">
+                <img alt="Armor" src="{{ item_image[3] }}">
+            </div>
+        {% endif %}
+
+        {% if item_image[4] %}
+            <div class="equipment pants" data-tippy-content="{{ item_info[4] }}">
+                <img alt="Pants" src="{{ item_image[4] }}">
+            </div>
+        {% endif %}
+
+        {% if item_image[5] %}
+            <div class="equipment gloves" data-tippy-content="{{ item_info[5] }}">
+                <img alt="Gloves" src="{{ item_image[5] }}">
+            </div>
+        {% endif %}
+
+        {% if item_image[6] %}
+            <div class="equipment boots" data-tippy-content="{{ item_info[6] }}">
+                <img alt="Boots" src="{{ item_image[6] }}">
+            </div>
+        {% endif %}
+
+        {% if item_image[7] %}
+            <div class="equipment wings" data-tippy-content="{{ item_info[7] }}">
+                <img alt="Wings" src="{{ item_image[7] }}">
+            </div>
+        {% endif %}
+
+        {% if item_image[8] %}
+            <div class="equipment imp" data-tippy-content="{{ item_info[8] }}">
+                <img alt="Imp" src="{{ item_image[8] }}">
+            </div>
+        {% endif %}
+
+        {% if item_image[9] %}
+            <div class="equipment pendant" data-tippy-content="{{ item_info[9] }}">
+                <img alt="Pendant" src="{{ item_image[9] }}">
+            </div>
+        {% endif %}
+
+        {% if item_image[10] %}
+            <div class="equipment left-ring" data-tippy-content="{{ item_info[10] }}">
+                <img alt="Left Ring" src="{{ item_image[10] }}">
+            </div>
+        {% endif %}
+
+        {% if item_image[11] %}
+            <div class="equipment right-ring" data-tippy-content="{{ item_info[11] }}">
+                <img alt="Right Ring" src="{{ item_image[11] }}">
+            </div>
+        {% endif %}
+
+        <img alt="Character Equipment" src="../../static/themes-media/Dark-Angel/images/inventory.png"
+             style="opacity:0.5">
+
+    </div>
+    <script>
+        tippy('.equipment', {
+            animation: 'shift-away',
+            theme: 'light',
+            arrow: true,
+            allowHTML: true,
+            //followCursor:true,
+        })
+    </script>
+{% endblock content %}

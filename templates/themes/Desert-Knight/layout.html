@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    {% include header %}
+    <title>Mu Online Desert Knight </title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <link href="/static/themes-media/Desert-Knight/css/css-reset.css" rel="stylesheet">
+    <link href="/static/themes-media/Desert-Knight/css/style.css" rel="stylesheet">
+</head>
+{% if error %}
+    <p class='alert alert-error'><strong>Error:</strong> {{ error }}
+{% endif %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <ul class=flashes>
+            {% for category, message in messages %}
+                <li class="alert alert-{{ category }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
+<body>
+{% if theme_switch_form %}
+    <div class="theme-switch">
+        <form method="post" action="">
+            <select name="theme" id="changetheme">
+                {% for themes in theme_switch_form %}
+                    <option value="{{ themes }}">{{ themes }}</option>
+                {% endfor %}
+            </select>
+        </form>
+    </div>
+    <script>
+        localStorage.setItem("themeselect", "{{ session['theme'] }}");
+        $('#changetheme').find('option').each(function (i, e) {
+            if ($(e).val() == localStorage.getItem("themeselect")) {
+                $('#changetheme').prop('selectedIndex', i);
+            }
+        });
+        $(function () {
+            $('#changetheme').change(function () {
+                this.form.submit();
+            });
+        });
+    </script>
+{% endif %}
+<body>
+<div class="wrapper">
+    <header class="header">
+        <ul id="top-menu" class="menu">
+            <li class="active"><a href="/home">Home</a></li>
+            <li><a href="/register">Register</a></li>
+            <li><a href="/ranking">Rankings</a></li>
+            <li><a href="/download">Files</a></li>
+            <li><a href="/rules">Rules</a></li>
+            <li><a href="/about">About</a></li>
+        </ul><!-- menu -->
+        <div class="logo">
+            <a href="https://darksteam.net/threads/dtpyweb.24394/"><img src="/static/default-images/logo.png"
+                                                                        alt=""></a>
+        </div><!-- logo -->
+        <div class="server-block">
+            <div id="carousel" class="carousel">
+                <button class="arrow prev"></button>
+                <div class="server">
+                    <ul class="images">
+                        <li>
+                            <div class="server-icon">
+                                <img src="/static/themes-media/Desert-Knight/images/server-icon.png" alt="">
+                            </div>
+                            <div class="server-info">
+                                <p>Mu x500 Server</p>
+                                <div><span class="online"><i class="online-icon"></i> Online: 914</span> (EX 700)</div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="server-icon">
+                                <img src="/static/themes-media/Desert-Knight/images/server-icon.png" alt="">
+                            </div>
+                            <div class="server-info">
+                                <p>Mu x500 Server</p>
+                                <div><span class="offline"><i class="online-icon"></i> Online: 914</span> (EX 700)</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <button class="arrow next"></button>
+            </div>
+        </div><!-- server-block -->
+    </header><!-- .header-->
+
+    <div class="container">
+        <main class="content">
+            {% block content %}
+            {% endblock content %}
+        </main><!-- .content -->
+        <aside class="sidebar">
+            <div class="soc-icons-block">
+                <a href="#" class="vk" target="_blank"></a> <a href="#" class="mmotop" target="_blank"></a> <a href="#"
+                                                                                                               class="tw"
+                                                                                                               target="_blank"></a>
+            </div>
+            <div class="login-block">
+                {% if not session['username'] %}
+                    <span class="sidebar-title login-title">User Login</span>
+                    <form method="post" class="form" action="">
+                        <p><input type="text" name="login_username" placeholder="Login"></p>
+                        <p><input type="password" name="login_password" placeholder="Password"></p>
+                        <button></button>
+                        <div class="login-links">
+                            <p><a href="#">Lost Password ?</a></p>
+                            <p><a href="/register">Registration</a></p>
+                        </div>
+                    </form>
+                {% else %}
+                    <span class="sidebar-title login-title">Welcome {{ session['username'] }}</span>
+                    <ul>
+                        <li><i class="fas fa-user-alt"></i> <a href="my-account">Account</a></li>
+                        <li><i class="fas fa-user-edit"></i> <a href="my-characters">Characters</a></li>
+                        <li><i class="fas fa-file-invoice-dollar"></i> <a href="vip-modules">Vip Modules</a></li>
+                        <li><i class="fas fa-dollar-sign"></i><a href="buy-credits">Buy Credits</a></li>
+                        <li><i class="fas fa-shopping-cart"></i> <a href="my-market">Market</a></li>
+                        <li><i class="fas fa-money-bill"></i> <a href="my-auction">Auction</a></li>
+                        <li><i class="fas fa-sign-out-alt"></i> <a href="logout">Logout</a></li>
+                    </ul>
+                {% endif %}
+            </div><!-- login-block -->
+            <div class="event-block widget">
+                <span class="sidebar-title">Server Time</span>
+                <div id="time"></div>
+                <a href="#" class="event-blocks">
+                    <p class="flex-s"><span class="event-title">Golden Dragon Invasion</span> <span
+                            class="event-time-laps">07:00</span></p>
+                    <p class="flex-s"><span class="event-text">Before the invasion</span> <span class="event-time">3h 53min</span>
+                    </p>
+                </a>
+                <a href="#" class="event-blocks">
+                    <p class="flex-s"><span class="event-title">White Wizard Invasion</span> <span
+                            class="event-time-laps">05:00</span></p>
+                    <p class="flex-s"><span class="event-text">Will start in</span> <span class="event-time">less than min</span>
+                    </p>
+                </a>
+                <a href="#" class="event-blocks">
+                    <p class="flex-s"><span class="event-title">Blood Castle</span> <span
+                            class="event-time-laps">04:30</span></p>
+                    <p class="flex-s"><span class="event-text">Will start in</span> <span class="event-time">less than min</span>
+                    </p>
+                </a>
+                <a href="#" class="event-blocks">
+                    <p class="flex-s"><span class="event-title">Devil Square</span> <span
+                            class="event-time-laps">04:00</span></p>
+                    <p class="flex-s"><span class="event-text">Will start in</span> <span class="event-time">less than min</span>
+                    </p>
+                </a>
+                <a href="#" class="event-blocks">
+                    <p class="flex-s"><span class="event-title">Chaos Castle</span> <span
+                            class="event-time-laps">06:35</span></p>
+                    <p class="flex-s"><span class="event-text">Will start in</span> <span class="event-time">less than min</span>
+                    </p>
+                </a>
+                <a href="#" class="event-blocks">
+                    <p class="flex-s"><span class="event-title">Illusion Temple</span> <span class="event-time-laps">03:30</span>
+                    </p>
+                    <p class="flex-s"><span class="event-text">Will start in</span> <span class="event-time">less than min</span>
+                    </p>
+                </a>
+            </div><!-- server-block -->
+            <div class="discussion-block widget">
+                <span class="sidebar-title">Discussions</span>
+                <ul class="discussions">
+                    <li>
+                        <a href="#" class="forum-title">You will see only here</a>
+                        <span>by <a href="#">Caster</a>, 30.01.2013, 07:32</span>
+                    </li>
+                    <li>
+                        <a href="#" class="forum-title">Season 6 is waiting for you</a>
+                        <span>by <a href="#">graf1488</a>, 30.01.2013, 07:32</span>
+                    </li>
+                    <li>
+                        <a href="#" class="forum-title">Increased amount of Zen</a>
+                        <span>by <a href="#">QDesnik</a>, 30.01.2013, 07:32</span>
+                    </li>
+                    <li>
+                        <a href="#" class="forum-title">Randomly prizes</a>
+                        <span>by <a href="#">GeniuS</a>, 30.01.2013, 07:32</span>
+                    </li>
+                    <li>
+                        <a href="#" class="forum-title">Merchant who sells cans SD</a>
+                        <span>by <a href="#">Kurosaki</a>, 30.01.2013, 07:32</span>
+                    </li>
+                </ul>
+            </div><!-- discussion-block -->
+        </aside><!-- sidebar -->
+    </div><!-- .container-->
+
+    <footer class="footer flex-s">
+        <div class="footer-block flex">
+            <div class="footer-i">
+                <div class="copyright">
+                    {{ author }}
+                </div>
+                <div class="banners">
+                    <a href="#"><img src="/static/themes-media/Desert-Knight/images/banner.png" alt=""></a> <a href="#"><img
+                        src="/static/themes-media/Desert-Knight/images/banner.png" alt=""></a>
+                </div>
+            </div>
+            <div class="footer-menu flex">
+                <ul>
+                    <li class="menu-title">About</li>
+                    <li><a href="#">News</a></li>
+                    <li><a href="#">Help</a></li>
+                    <li><a href="#">About</a></li>
+                </ul>
+                <ul>
+                    <li class="menu-title">Community</li>
+                    <li><a href="#">Forum</a></li>
+                    <li><a href="#">Downloads</a></li>
+                    <li><a href="#">Top Players</a></li>
+                </ul>
+                <ul>
+                    <li class="menu-title">Media</li>
+                    <li><a href="#">Video</a></li>
+                    <li><a href="#">Wallpapers</a></li>
+                    <li><a href="#">Screenshots</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-logo">
+            <a href="#"><img src="/static/themes-media/Desert-Knight/images/f-logo.png" alt=""></a>
+        </div>
+    </footer><!-- .footer -->
+
+</div><!-- .wrapper -->
+<script src="/static/themes-media/Desert-Knight/js/jquery-2.1.4.min.js"></script>
+<script src="/static/themes-media/Desert-Knight/js/global.js"></script>
+<script>
+    var width = 200;
+    var count = 1;
+
+    var carousel = document.getElementById('carousel');
+    var list = carousel.querySelector('ul');
+    var listElems = carousel.querySelectorAll('li');
+
+    var position = 0;
+
+    carousel.querySelector('.prev').onclick = function () {
+        position = Math.min(position + width * count, 0)
+        list.style.marginLeft = position + 'px';
+    };
+
+    carousel.querySelector('.next').onclick = function () {
+        position = Math.max(position - width * count, -width * (listElems.length - count));
+        list.style.marginLeft = position + 'px';
+    };
+</script>
+</body>
+
+</html>

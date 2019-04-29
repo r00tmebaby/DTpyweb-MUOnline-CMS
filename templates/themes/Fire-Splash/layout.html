@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="/static/themes-media/Fire-Splash/css/css-reset.css" rel="stylesheet">
+    <link href="/static/themes-media/Fire-Splash/css/style.css" rel="stylesheet">
+    {% include header %}
+
+</head>
+{% if error %}
+    <p class='alert alert-error'><strong>Error:</strong> {{ error }}
+{% endif %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <ul class=flashes>
+            {% for category, message in messages %}
+                <li class="alert alert-{{ category }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
+<body>
+{% if theme_switch_form %}
+    <div class="theme-switch">
+        <form method="post" action="">
+            <select name="theme" id="changetheme">
+                {% for themes in theme_switch_form %}
+                    <option value="{{ themes }}">{{ themes }}</option>
+                {% endfor %}
+            </select>
+        </form>
+    </div>
+
+    <script>
+        localStorage.setItem("themeselect", "{{ session['theme'] }}");
+        $('#changetheme').find('option').each(function (i, e) {
+            if ($(e).val() == localStorage.getItem("themeselect")) {
+                $('#changetheme').prop('selectedIndex', i);
+            }
+        });
+        $(function () {
+            $('#changetheme').change(function () {
+                this.form.submit();
+            });
+        });
+    </script>
+{% endif %}
+<div class="wrapper">
+
+    <header class="header">
+        <div class="logo">
+            <div data-text="GLITCH" class="glitch sidebar-title dis-title logofix">
+                <a href="https://darksteam.net/threads/dtpyweb.24394/">{{ server }}</a>
+            </div>
+        </div><!-- logo -->
+        <div class="menu">
+            <ul id="top-menu" class="left">
+                <li><a href="/home">News</a></li>
+                <li><a href="rankings">Rankings</a></li>
+                <li><a href="/download">Download</a></li>
+            </ul>
+            <ul class="right">
+                <li><a href="/register">Register</a></li>
+                <li><a href="/statistics">Statistics</a></li>
+                <li><a href="/about">About</a></li>
+            </ul>
+        </div><!-- menu -->
+        <div class="fast-game-block">
+            <a href="/register">REGISTRATION <span>for user cp access</span></a>
+            <a href="#" class="fast-start">FAST <br> START</a>
+            <a href="/download">DOWNLOAD <span>mupatch 2.4 gb</span></a>
+        </div><!-- fast-game-block -->
+    </header><!-- .header-->
+
+    <div class="container">
+        <div class="container-c">
+            <aside class="sidebar">
+                <div class="status-block">
+                    <div class="sidebar-title status-title">
+                        Status
+                    </div>
+                    <div class="status-block-c">
+                        <div class="server-name-block">
+                            <span class="server-name">MU Server #1</span>
+                            <span class="server-name">Gracia</span>
+                            <span class="server-name">Tournament</span>
+                        </div>
+                        <div class="online-block">
+                            <span class="online server-online">1235</span>
+                            <span class="online server-online">235</span>
+                            <span class="online server-offline">0</span>
+                        </div>
+                    </div>
+                </div><!-- status-block -->
+                <div class="login-block">
+                    {% if not session['username'] %}
+                        <div class="sidebar-title">
+                            Account Panel
+                        </div><!-- sidebar-title -->
+
+                        <div class="sidebar-title login-title">
+                            Login
+                        </div>
+                        <form method="post" action="">
+                            <p>
+                                <span>Login: <a href="register">(registration)</a></span>
+                                <input type="text" name="login_username">
+                            </p>
+                            <p>
+                                <span>Password: <a href="lost-password">(forgot password)</a></span>
+                                <input type="password" name="login_password">
+                            </p>
+                            <button>LOGIN</button>
+                        </form>
+                    {% else %}
+                        <div class="fast-links sidebar-block">
+                            <div class="sidebar-title">
+                                <i class="fas fa-user fa-1x"></i> Welcome {{ session['username'] }}
+                            </div><!-- sidebar-title -->
+                            <div class="sidebar-title">
+                                <ul>
+                                    <li><i class="fas fa-user-alt"></i> <a href="my-account">Account</a></li>
+                                    <li><i class="fas fa-user-edit"></i> <a href="my-characters">Characters</a></li>
+                                    <li><i class="fas fa-file-invoice-dollar"></i> <a href="vip-modules">Vip Modules</a>
+                                    </li>
+                                    <li><i class="fas fa-dollar-sign"></i><a href="buy-credits">Buy Credits</a></li>
+                                    <li><i class="fas fa-shopping-cart"></i> <a href="my-market">Market</a></li>
+                                    <li><i class="fas fa-money-bill"></i> <a href="my-auction">Auction</a></li>
+                                    <li><i class="fas fa-sign-out-alt"></i> <a href="logout">Logout</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                </div><!-- login-block -->
+                <div class="discussions-block">
+
+                    <div class="top-players">
+                        <div class="sidebar-title dis-title">
+                            <p>TOP 10 PLAYERS</p>
+                        </div>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <td class="t-m">player</td>
+                                <td class="t-m">resets / level</td>
+                            </tr>
+                            </thead>
+                            {% for tops in top10 %}
+                                <tr>
+                                    <td>
+                                        <span>{{ loop.index }} </span>
+                                        <span> <a href="userinfo-{{ tops[1] }}" title="{{ tops[1] }}"> {{ tops[1] }}</a></span>
+                                    </td>
+                                    <td>{{ tops[2] }} / {{ tops[29] }}</td>
+                                </tr>
+                            {% endfor %}
+                            </thead>
+                        </table>
+                        <div class="all-t"><a href="#">All top-list</a></div>
+                    </div><!-- top-players -->
+                </div><!-- discussions-block -->
+            </aside><!-- sidebar -->
+            <main class="content">
+                {% block content %}
+                {% endblock content %}
+            </main><!-- .content -->
+        </div><!-- container-c -->
+    </div><!-- .container-->
+
+    <footer class="footer">
+        <div class="counter-block">
+            <a href="#"><img src="../../../static/themes-media/Fire-Splash/images/counter.png" alt=""></a> <a
+                href="#"><img src="../../../static/themes-media/Fire-Splash/images/counter.png" alt=""></a>
+        </div><!-- counter-block -->
+        <div class="copyright-block">
+            {{ author }}
+        </div>
+    </footer><!-- .footer -->
+
+</div><!-- .wrapper -->
+</body>
+</html>

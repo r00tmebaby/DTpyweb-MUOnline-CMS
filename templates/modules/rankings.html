@@ -1,0 +1,9 @@
+{% extends theme %}
+{% block content %}
+    <div class="page-title"> Rankings</div>
+    <div class="content_new">
+        {% for chars in characters %}
+            {{ chars }}
+        {% endfor %}
+    </div>
+{% endblock content %}
