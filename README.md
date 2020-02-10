@@ -2,7 +2,7 @@
 
 DTpyWeb is another MuOnline website but this time instead in PHP it is written in Python with Flask and Jinja2 template system. It was originally created for <a href='https://darksteam.net/threads/dtpyweb.24394/'>DarksTeam users</a> and released there first.
 
-<b>Login: test/test <a href="http://5.9.94.164:50450/userinfo-DemonuMu">Live Demo </a></b>
+<b>Login: test/test <a href="http://91.134.116.39:82/userinfo-Blafiora">Live Demo </a></b>
 
 <img src='https://i.ibb.co/swtpDFR/Untsitled.png'>
 <img src='https://i.gyazo.com/836920be375c76df92478a5f424e1819.jpg'>
