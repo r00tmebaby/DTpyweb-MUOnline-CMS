@@ -1,0 +1,66 @@
+
+#CDT {
+    font-size: 32px;
+    color: #fff;
+}
+
+#CDT .number-wrapper {
+    margin: 0px 16px;
+    position: relative;
+}
+
+#CDT .number {
+    display: inline-table;
+    *display: inline;
+    *zoom: 1;
+    text-align: center;
+    padding: 7px 9px;
+    border-radius: 3px 3px 0px 0px;
+    background: linear-gradient(to bottom, rgba(124, 221, 238, 0.5), rgba(68, 127, 150, 0.4));
+    box-shadow: 0px 4px rgba(0, 0, 0, 0.1); 
+}
+#CDT .number:after {
+  content: ":";
+  position: absolute;
+  margin-left: 21px;
+}
+.number-sec:after {
+  display: none !important;
+}
+       
+#CDT .line {
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    top: 52%;
+    left: 0;
+}
+       
+.caption {
+   font-size: 11px;
+   position: absolute;
+   bottom: -25px;
+   left: 0;
+   text-align: center;
+   width: 100%;
+   color: #fff;
+   text-transform: lowercase !important;
+}
+
+.timer {
+  width: 330px;
+  height: 100px;
+  position: absolute;
+  background: linear-gradient(to right, rgba(119, 202, 255, 0), rgba(119, 202, 255, 0.2));
+  border-radius: 7px;
+  text-align: center;
+  padding: 15px;
+  z-index: 5;
+}
+
+.s-start {
+  color: #fff;
+  margin-bottom: 20px;
+  display: block
+}
+    

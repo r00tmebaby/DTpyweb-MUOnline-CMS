@@ -1,0 +1,86 @@
+{% extends theme %}
+{% block login %}
+    <div class="login-block">
+        <form method="POST" action="">
+            <input type="text" name="login_username" placeholder="Login">
+            <input type="password" name="login_password" placeholder="Password">
+            <button></button>
+        </form>
+    </div>
+{% endblock login %}
+{% block slider %}
+    <div class="slider-block slider">
+        <div class="slider-c"><div class="slides">
+            <div class="slide active">
+                <img src="/static/themes-media/Mu-Dark/images/slider-img.jpg" alt="">
+                <div><a href="#">The official opening of the project</a>
+                    MU Online was established in December 2001, the Korean game company Webzen.</div>
+            </div>
+            <div class="slide">
+                <img src="/static/themes-media/Mu-Dark/images/slider-img.jpg"  alt="">
+                <div><a href="#">The official opening of the project</a>
+                    MU Online was established in December 2001, the Korean game company Webzen.</div>
+            </div>
+            <div class="slide">
+                <img src=/static/themes-media/Mu-Dark/images/slider-img.jpg" alt="">
+                <div><a href="#">The official opening of the project</a>
+                    MU Online was established in December 2001, the Korean game company Webzen.</div>
+            </div>
+        </div>
+        </div><!-- slider -->
+        <div class="navigation"></div>
+    </div><!-- slider-block -->
+{% endblock slider %}
+
+{% block content %}
+    <div class="news">
+        <div class="news-title">
+            <h2><a href="#">News title - Good News Today</a></h2>
+        </div>
+        <div class="news-img">
+            <p><a href="#"><img src="/static/themes-media/Mu-Dark/images/news-img-1.jpg" alt=""></a></p>
+        </div>
+        <div class="news-text">
+            <p>War broke out between kingdoms. Wild animals turn into raging animals and the dead return to life, craving for blood. Fight with the dark influence of the Metin Stones as one of the allies of the Dragon. Collect all your strengths and take your weapons to protect the.War broke out between kingdoms. Wild animals turn into raging animals and the dead return to life, craving for blood. <br>
+                Fight with the dark influence of the Metin Stones as one of the allies of the Dragon. Collect all your strengths and take your weapons to protect the...<br></p>
+        </div>
+        <div class="news-info">
+            <div class="news-data">
+                Date: <span>December 2, 2018</span>   at <span>15:45</span>
+            </div>
+            <a href="#" class="read-more button">Read more</a>
+            <div class="news-comments">
+                Views: <span>120</span> <i></i> Comments: <span>12</span>
+            </div>
+        </div>
+    </div><!-- news -->
+    <div class="news">
+        <div class="news-title">
+            <h2><a href="#">Wild animals turn into raging animals and the dead return to life, craving for blood</a></h2>
+        </div>
+        <div class="news-img">
+            <p><a href="#"><img src="/static/themes-media/Mu-Dark/news-img-2.jpg" alt=""></a></p>
+        </div>
+        <div class="news-text">
+            <p>War broke out between kingdoms. Wild animals turn into raging animals and the dead return to life, craving for blood. Fight with the dark influence of the Metin Stones as one of the allies of the Dragon. Collect all your strengths and take your weapons to protect the.War broke out between kingdoms. Wild animals turn into raging animals and the dead return to life, craving for blood. <br>
+                Fight with the dark influence of the Metin Stones as one of the allies of the Dragon. Collect all your strengths and take your weapons to protect the...<br></p>
+            <p>War broke out between kingdoms. Wild animals turn into raging animals and the dead return to life, craving for blood. Fight with the dark influence of the Metin Stones as one of the allies of the Dragon. Collect all your strengths and take your weapons to protect the.War broke out between kingdoms. Wild animals turn into raging animals and the dead return to life, craving for blood. <br></p>
+        </div>
+        <div class="news-info">
+            <div class="news-data">
+                Date: <span>December 2, 2018</span>   at <span>15:45</span>
+            </div>
+            <a href="#" class="read-more button">Read more</a>
+            <div class="news-comments">
+                Views: <span>120</span> <i></i> Comments: <span>12</span>
+            </div>
+        </div>
+    </div><!-- news -->
+    <div class="pagination">
+        <a href="#" class="back">back</a> <a href="#" class="active pag">1</a> <a href="#" class="pag">2</a> <a href="#" class="pag">3</a> <a href="#" class="pag">4</a> <a href="#" class="pag">5 </a> ... <a href="#" class="pag">25</a> <a href="#" class="next">next</a>
+    </div><!--pagination -->
+    <div class="to-top">
+        <div id="toTop">
+        </div>
+    </div>
+{% endblock content %}

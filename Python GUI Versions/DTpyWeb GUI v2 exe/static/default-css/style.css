@@ -1,0 +1,163 @@
+/* Character Equipment
+-----------------------------------------------------------------------------*/
+.equipment{
+    position:absolute;
+    z-index: 3;
+    border:none !important;
+}
+.equipment img{
+    position: relative;
+    width:90%;
+    height:90%;
+    padding:5px 5px;
+    border:none !important;
+}
+.left-hand{
+    margin-top:220px;
+    width:65px;
+    height:125px;
+    margin-left:10px;
+}
+.right-hand{
+    margin-top: 220px;
+    margin-left: 327px;
+    height:130px;
+}
+.helm{
+    margin-top:30px;
+    margin-left: 65px;
+    width:70px;
+    height:80px;
+
+}
+.armor{
+    margin-top:110px;
+    width:80px;
+    height:100px;
+    margin-left: 37px;
+}
+.pants{
+    margin-top: 147px;
+    margin-left: 275px;
+    height:70px;
+}
+.gloves{
+    margin-top:275px;
+    margin-left: 82px;
+    width:70px;
+}
+.boots{
+    margin-top:273px;
+    margin-left: 250px;
+    width:70px;
+}
+.wings{
+    margin-top: 40px;
+    margin-left:270px;
+    width:130px;
+    height:110px;
+}
+.imp{
+    margin-top:100px;
+}
+.pendant{
+    margin-top: 50px;
+    margin-left: 225px;
+    height:45px;
+    width:45px;
+}
+.left-ring{
+    margin-top:220px;
+    margin-left: 95px;
+    height:40px;
+    width:40px;
+}
+.right-ring{
+    margin-top:222px;
+    margin-left: 270px;
+    border: 1px solid #FFF;
+    height:40px;
+    width:40px;
+}
+
+/* Default Form Alert Messages
+-----------------------------------------------------------------------------*/
+.form-alert{
+  opacity: 0;
+  animation: hideafter 5s normal forwards;
+  font-weight: 600;
+  text-shadow:1px 1px #000;
+  color:white;
+  position:marker;
+  font-size:9pt;
+  padding:2px 2px;
+}
+.alert{
+  opacity: 0;
+  animation: hideafter 3s normal forwards;
+  position:absolute;
+  z-index:90000;
+  top:400px;
+  font-size:1rem;
+  font-weight: 600;
+  text-shadow:1px 1px #000;
+  color:white;
+  right:0  ;
+  padding:20px 20px;
+ }
+@keyframes hideafter {
+    0% {
+        opacity: 0;
+    }
+    30% , 50%{
+      opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.alert-error{
+  background: rgba(217,0,0,0.5);
+}
+.alert-success{
+  background: rgba(0,217,0,0.5);
+}
+.alert-info{
+  background: rgba(0,0,217,0.5);
+}
+.theme-switch{
+   position:absolute;
+}
+.theme-switch button{
+    display:block;
+    width:100px;
+    margin:5px 5px;
+    padding:5px 5px;
+}
+
+.theme-switch select {
+    padding: 12px 15px;
+    border-radius: 5px;
+    position: relative;
+    font-size: 11px;
+    -webkit-appearance: none;
+    background-image: url(../default-images/select-icon.png);
+    background-position: right 15px center;
+    background-repeat: no-repeat;
+    -moz-appearance: none;
+    text-indent: 0.01px;
+    text-overflow: '';
+    -ms-appearance: none;
+    appearance: none!important;
+    min-width: 200px;
+    cursor: pointer;
+}
+
+.theme-switch select:focus {
+    border: 1px solid #425173;
+}
+
+.theme-switch select::-ms-expand {
+    display: none;
+}

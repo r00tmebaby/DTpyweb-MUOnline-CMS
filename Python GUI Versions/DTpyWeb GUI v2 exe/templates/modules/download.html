@@ -1,0 +1,29 @@
+{% extends theme %}
+{% block content %}
+    <div class="page-title"> Download </div>
+    <div class="content_new">
+    <table class="table">
+         <thead>
+            <tr>
+               <th scope="col">#</th>
+               <th scope="col">Description</th>
+               <th scope="col">Download Link</th>
+               <th scope="col">Host Name</th>
+               <th scope="col">File Size</th>
+            </tr>
+         </thead>
+
+      {% for links in download_links %}
+          <tbody style="text-align: center">
+                <tr>
+                    <td>{{ loop.index }}.</td>
+                    <td>{{ links.split(",")[0]}}</td>
+                    <td><a target="_blank" href="{{ links.split(",")[1]}}"><i class="fas fa-download"></i></a></td>
+                    <td>{{ links.split(",")[2]}}</td>
+                    <td>{{ links.split(",")[3]}}</td>
+                </tr>
+          </tbody>
+       {% endfor %}
+    </table>
+    </div>
+{% endblock content %}

@@ -1,0 +1,290 @@
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+     {% include header %}
+    <link rel="stylesheet" href="/static/themes-media/Crystal-Mu/style.css">
+	<script type="text/javascript" src="/static/themes-media/Crystal-Mu/js/jquery-1.8.2.js"></script>
+	<script type="text/javascript" src="/static/themes-media/Crystal-Mu/js/jquery.nivo.slider.pack.js"></script>
+	<script type="text/javascript">
+	$(window).load(function() {
+		$('#slider').nivoSlider();
+	});
+	</script>
+	<title>CrystalMu - MU Online server</title>
+</head>
+{% if error %}
+    <p class='alert alert-error'><strong>Error:</strong> {{ error }}
+{% endif %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <ul class=flashes>
+            {% for category, message in messages %}
+                <li class="alert alert-{{ category }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
+<body>
+{% if theme_switch_form %}
+
+<div class="theme-switch" >
+    <form method="post" action="">
+        <select  name= "theme" id="changetheme">
+            {% for themes in theme_switch_form %}
+            <option value="{{ themes }}">{{ themes }}</option>
+            {% endfor %}
+        </select>
+    </form>
+</div>
+<script>
+    localStorage.setItem("themeselect", "{{ session['theme'] }}");
+        $('#changetheme').find('option').each(function(i,e){
+        if($(e).val() == localStorage.getItem("themeselect")){
+            $('#changetheme').prop('selectedIndex',i);
+        }
+    });
+    $(function() {
+        $('#changetheme').change(function() {
+            this.form.submit();
+        });
+    });
+</script>
+{% endif %}
+<body>
+	<div id='body_top'>
+		<div id='body_bottom'>
+			<div id='wrapper'>
+				<div id='top_panel'>
+					Global Server Time: <span id="time"></span>
+					<div id='online'>
+						Total online:
+						<div id='online_bg'>
+							<div id='online_bar' style="width: 75%">
+							</div>
+						</div>
+						<span>2931</span>
+					</div>
+					<div id='lang'>
+						Language:
+						<a href="#">
+						<span>English</span>
+						<img src="/static/themes-media/Crystal-Mu/design_img/eng_lang.png" alt="">
+						</a>
+					</div>
+				</div>
+				<div id='header'>
+					<a href="https://darksteam.net/threads/dtpyweb.24394/">
+                        <img src="/static/themes-media/Crystal-Mu/design_img/logo.jpg" alt=""></a>
+				</div>
+				<div id='menu_bg'>
+					<a href="/home">HOME</a>
+					<a href="/rankings">RANKINGS</a>
+					<a href="/download">FILES</a>
+					<a href="/register">REGISTRATION</a>
+					<a href="/rules">RULES</a>
+					<a href="/about">ABOUT</a>
+				</div>
+				<div id='button_bg'>
+					<a href="#"></a>
+				</div>
+				<div id='content'>
+					<div id='left_block'>
+						<div id='left_top'>
+						</div>
+						<!-- Market items -->
+						<div id='market_bg'>
+							<div class='item'>
+								<div class='item_img'>
+									<img src="/static/themes-media/Crystal-Mu/img/item_01.gif" alt="">
+								</div>
+								<div class='item_info'>
+									<a href="#">Short sword</a><br>
+									for Dark Knight
+								</div>
+							</div>
+							<div class='item'>
+								<div class='item_img'>
+									<img src="/static/themes-media/Crystal-Mu/img/item_02.gif" alt="">
+								</div>
+								<div class='item_info'>
+									<a href="#">Sword of Asassin</a><br>
+									for Summoner
+								</div>
+							</div>
+							<div class='item'>
+								<div class='item_img'>
+									<img src="/static/themes-media/Crystal-Mu/img/item_03.gif" alt="">
+								</div>
+								<div class='item_info'>
+									<a href="#">Serpent Sword</a><br>
+									for Dark Lord
+								</div>
+							</div>
+							<div class='item'>
+								<div class='item_img'>
+									<img src="/static/themes-media/Crystal-Mu/img/item_04.gif" alt="">
+								</div>
+								<div class='item_info'>
+									<a href="#">Galdius</a><br>
+									for Dark Wizard
+								</div>
+							</div>
+							<div id='more_items'>
+								<a href="#">+ More items</a>
+							</div>
+						</div>
+						<div id='left_bottom'>
+						</div>
+					</div>
+					<div id='right_block'>
+						<!-- Account panel -->
+            {%  if not session['username'] %}
+						<div id='account_bg'>
+							<div id='login'>
+                                <form method="post">
+								    <input id='login_input' name="login_username" type="text" onfocus="if(this.value=='Login')this.value=''" onblur="if(this.value=='')this.value='Login'" value="Login">
+								    <input id='password_input' name="login_password" type="password" onfocus="if(this.value=='Password')this.value=''" onblur="if(this.value=='')this.value='Password'" value="Password">
+								    <a href="#">Lost password</a><br>
+								    <a href="/register">Registration</a><br>
+								    <div    id='login_button'>
+								    	<button></button>
+                                </form>
+								</div>
+							</div>
+						</div>
+                         {% else %}
+                         <div id='status_bg'>
+                             <ul>
+                                   <li><a href="my-account">Account</a></li>
+                                   <li><a href="my-characters">Characters</a></li>
+                                   <li><a href="vip-modules">Vip Modules</a></li>
+                                   <li><a href="buy-credits">Buy Credits</a></li>
+                                   <li><a href="my-market">Market</a></li>
+                                   <li><a href="my-auction">Auction</a></li>
+                                   <li><a href="logout">Logout</a></li>
+                	            	<li class="cursor-menu-right"></li>
+                	          </ul>
+                         </div>
+                    {%  endif %}
+
+						<!-- Status -->
+						<div id='status_bg'>
+							<div class='server'>
+								<div class='s_online'>
+									<span style="color: #719f42">2565</span>
+								</div>
+								<div class='s_bar'>
+									<div style="height: 100%"></div>
+								</div>
+								<div class='s_name'>
+									<a href="#">EX100</a>
+								</div>
+							</div>
+							<div class='server'>
+								<div class='s_online'>
+									<span style="color: #c2992f">983</span>
+								</div>
+								<div class='s_bar'>
+									<div style="height: 50%" id='sb_mid'></div>
+								</div>
+								<div class='s_name'>
+									<a href="#">EX500</a>
+								</div>
+							</div>
+							<div class='server'>
+								<div class='s_online'>
+									<span style="color: #cc3c50">0</span>
+								</div>
+								<div class='s_bar'>
+									<div style="height: 3%" id='sb_low'></div>
+								</div>
+								<div class='s_name'>
+									<a href="#">EX700</a>
+								</div>
+							</div>
+						</div>
+						<div id='right_bottom'>
+						</div>
+					</div>
+					<div id='center_block'>
+						<!-- Slider -->
+						<div id='slider_bg'>
+							<div id="slider-wrapper">
+								<div id="slider" class="nivoSlider">
+									<img src="/static/themes-media/Crystal-Mu/img/slide_01.jpg" alt="" title="#htmlcaption1">
+									<img src="/static/themes-media/Crystal-Mu/img/slide_02.jpg" alt="" title="#htmlcaption2">
+									<img src="/static/themes-media/Crystal-Mu/img/slide_01.jpg" alt="" title="#htmlcaption3">
+									<img src="/static/themes-media/Crystal-Mu/img/slide_02.jpg" alt="" title="#htmlcaption4">
+									<img src="/static/themes-media/Crystal-Mu/img/slide_01.jpg" alt="" title="#htmlcaption5">
+								</div>
+								<div id="htmlcaption1" class="nivo-html-caption">
+									<span class='slide_title'><a href="#">New heroes and arts</a></span>
+									MU Online was created in December 2001 by the Korean gaming company Webzen. Like in most MMORPGs.
+								</div>
+								<div id="htmlcaption2" class="nivo-html-caption">
+									<span class='slide_title'><a href="#">Slide #2</a></span>
+									MU Online was created in December 2001 by the Korean gaming company Webzen. Like in most MMORPGs.
+								</div>
+								<div id="htmlcaption3" class="nivo-html-caption">
+									<span class='slide_title'><a href="#">Slide #3</a></span>
+									MU Online was created in December 2001 by the Korean gaming company Webzen. Like in most MMORPGs.
+								</div>
+								<div id="htmlcaption4" class="nivo-html-caption">
+									<span class='slide_title'><a href="#">Slide #4</a></span>
+									MU Online was created in December 2001 by the Korean gaming company Webzen. Like in most MMORPGs.
+								</div>
+								<div id="htmlcaption5" class="nivo-html-caption">
+									<span class='slide_title'><a href="#">Slide #5</a></span>
+									MU Online was created in December 2001 by the Korean gaming company Webzen. Like in most MMORPGs.
+								</div>
+							</div>
+						</div>
+						<!-- News -->
+						<div id='news'>
+                        {% block content %}
+                        {% endblock content %}
+						</div>
+					</div>
+				</div>
+				<div id='footer'>
+					<div id='f_menu'>
+						<a href="#">HOME</a>
+						<span></span>
+						<a href="#">FORUMS</a>
+						<span></span>
+						<a href="#">FILES</a>
+						<span></span>
+						<a href="#">REGISTRATION</a>
+						<span></span>
+						<a href="#">RULES</a>
+						<span></span>
+						<a href="#">ABOUT</a>
+					</div>
+					<div id='copyright'>
+                     {{ author }}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+                <script>
+                    (function () {
+                        function checkTime(i) {
+                            return (i < 10) ? "0" + i : i;
+                        }
+
+                        function startTime() {
+                            var today = new Date(),
+                                h = checkTime(today.getHours()),
+                                m = checkTime(today.getMinutes()),
+                                s = checkTime(today.getSeconds());
+                            document.getElementById('time').innerHTML = h + ":" + m + ":" + s;
+                            t = setTimeout(function () {
+                                startTime()
+                            }, 500);
+                        }
+                        startTime();
+                    })();
+                </script>

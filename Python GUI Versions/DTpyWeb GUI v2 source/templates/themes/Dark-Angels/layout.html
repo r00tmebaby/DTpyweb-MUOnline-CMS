@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<head>
+    {% include header %}
+    <link href="/static/themes-media/Dark-Angel/css/css-reset.css" rel="stylesheet">
+    <link rel="shortcut icon" href="/static/themes-media/Dark-Angel/images/ico.png" type="image/x-icon">
+    <link href="/static/themes-media/Dark-Angel/css/style.css" rel="stylesheet">
+    <script src="/static/themes-media/Dark-Angel/js/jquery-2.1.4.min.js"></script>
+    <script src="/static/themes-media/Dark-Angel/js/slider.js"></script>
+    <script src="/static/themes-media/Dark-Angel/js/storm.js"></script>
+</head>
+
+    {% if error %}
+        <p class='alert alert-error'><strong>Error:</strong> {{ error }}
+    {% endif %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for category, message in messages %}
+      <li class="alert alert-{{ category }}">{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+<body>
+{% if theme_switch_form %}
+<div class="theme-switch" >
+    <form method="post" action="">
+        <select name= "theme" id="changetheme">
+            {% for themes in theme_switch_form %}
+            <option value="{{ themes }}">{{ themes }}</option>
+            {% endfor %}
+        </select>
+    </form>
+</div>
+<script>
+    localStorage.setItem("themeselect", "{{ session['theme'] }}");
+        $('#changetheme').find('option').each(function(i,e){
+        if($(e).val() == localStorage.getItem("themeselect")){
+            $('#changetheme').prop('selectedIndex',i);
+        }
+    });
+    $(function() {
+        $('#changetheme').change(function() {
+            this.form.submit();
+        });
+    });
+</script>
+{% endif %}
+<div class="body-t"><canvas id="canvas" ></canvas>
+	<div class="wrapper">
+		<header class="header">
+			<div class="select-block">
+               <div class="timer"> Server Time: <div style="margin-left:8px;padding:2px 2px;" id="time"></div></div>
+			</div>
+			<div class="logo">
+                   <div class="sparksa">
+			           <div class="sparks parks-1"></div>
+			           <div class="sparks sparks-2"></div>
+                       <div class="sparks sparks-3"></div>
+                    </div>
+				<a href="https://darksteam.net/threads/dtpyweb.24394/"></a>
+			</div><!-- logo -->
+		</header><!-- .header-->
+			<div class="container">
+				<aside class="left-sidebar">
+                	<div class="menu">
+	                	<ul id="top-menu">
+	                		<li><a href="/home">News</a></li>
+	                		<li><a href="/rankings">Rankings</a></li>
+	                		<li><a href="/download">Files</a></li>
+	                		<li><a href="/register">Registration</a></li>
+	                		<li><a href="/rules">Rules</a></li>
+	                		<li><a href="/about">About</a></li>
+	                		<li class="cursor-menu"></li>
+	                	</ul>
+	                </div>
+					<div class="market-block">
+						<div class="sidebar-title">
+							Market
+						</div>
+						<div class="block active" id="block-1">
+							<table>
+								<tbody>
+									<tr>
+										<td class="z-m">Zen</td> <td class="z-m"><img src="/static/themes-media/Dark-Angel/images/change-icon.png" alt=""></td> <td class="z-m">Credits</td>
+ 									</tr>
+ 									<tr>
+ 										<td>2 000 000</td> <td></td> <td>2 000 000</td>
+ 									</tr>
+ 									<tr>
+ 										<td>3 000 000</td> <td></td> <td>3 000 000</td>
+ 									</tr>
+ 									<tr>
+ 										<td>1 000 000</td> <td></td> <td>1 000 000</td>
+ 									</tr>
+ 									<tr>
+ 										<td>1 150 000</td> <td></td> <td>1 150 000</td>
+ 									</tr>
+ 									<tr>
+ 										<td>8 900 000</td> <td></td> <td>8 900 000</td>
+ 									</tr>
+								</tbody>
+							</table>
+							<table>
+								<tbody>
+									<tr>
+										 <td class="z-m">Credits</td> <td class="z-m"><img src="/static/themes-media/Dark-Angel/images/change-icon.png" alt=""></td> <td class="z-m">Zen</td>
+ 									</tr>
+ 									<tr>
+ 										<td>2 000 000</td> <td></td> <td>2 000 000</td>
+ 									</tr>
+ 									<tr>
+ 										<td>3 000 000</td> <td></td> <td>3 000 000</td>
+ 									</tr>
+ 									<tr>
+ 										<td>1 000 000</td> <td></td> <td>1 000 000</td>
+ 									</tr>
+ 									<tr>
+ 										<td>1 150 000</td> <td></td> <td>1 150 000</td>
+ 									</tr>
+ 									<tr>
+ 										<td>8 900 000</td> <td></td> <td>8 900 000</td>
+ 									</tr>
+								</tbody>
+							</table>
+						</div>
+
+						<div class="block" id="block-2">
+							<table>
+								<tbody>
+									<tr>
+										<td class="z-m">Credits</td> <td class="z-m"><img src="/static/themes-media/Dark-Angel/images/change-icon.png" alt=""></td> <td class="z-m">Zen</td>
+ 									</tr>
+ 									<tr>
+ 										<td>2 000 000</td> <td></td> <td>2 000 000</td>
+ 									</tr>
+ 									<tr>
+ 										<td>3 000 000</td> <td></td> <td>3 000 000</td>
+ 									</tr>
+ 									<tr>
+ 										<td>1 000 000</td> <td></td> <td>1 000 000</td>
+ 									</tr>
+ 									<tr>
+ 										<td>1 150 000</td> <td></td> <td>1 150 000</td>
+ 									</tr>
+ 									<tr>
+ 										<td>8 900 000</td> <td></td> <td>8 900 000</td>
+ 									</tr>
+								</tbody>
+							</table>
+							<table>
+								<tbody>
+									<tr>
+										 <td class="z-m">Zen</td> <td class="z-m"><img src="/static/themes-media/Dark-Angel/images/change-icon.png" alt=""></td> <td class="z-m">Credits</td>
+ 									</tr>
+ 									<tr>
+ 										<td>1 000 000</td> <td></td> <td>3 000 000</td>
+ 									</tr>
+ 									<tr>
+ 										<td>300 000</td> <td></td> <td>3 000 000</td>
+ 									</tr>
+ 									<tr>
+ 										<td>1 000 000</td> <td></td> <td>480</td>
+ 									</tr>
+ 									<tr>
+ 										<td>1 150 000</td> <td></td> <td>1 150 000</td>
+ 									</tr>
+ 									<tr>
+ 										<td>8 900 000</td> <td></td> <td>80 900 000</td>
+ 									</tr>
+								</tbody>
+							</table>
+						</div>
+						<button type="button" data-tab="block-1" class="btn-block buy active">buying</button>
+						<button type="button" data-tab="block-2" class="btn-block sell">selling</button>
+					</div><!-- market-block -->
+					<div class="top-players">
+						<div class="sidebar-title top-sidebar-title">
+							TOP 10 PLAYERS
+						</div>
+						<table>
+							<tbody>
+								<tr>
+									<td class="t-m">player</td> <td class="t-m">resets / level</td>
+								</tr>
+                                {% for tops in top10 %}
+                                    <tr>
+                                        <td>
+                                            <span>{{ loop.index  }} </span>
+                                            <a href="userinfo-{{ tops[1] }}" title="{{ tops[1] }}"> {{ tops[1] }}</a>
+                                        </td>
+                                        <td>{{ tops[2]  }} / {{ tops[29] }}</td>
+								     </tr>
+                                {% endfor %}
+							</tbody>
+						</table>
+						<div class="all-t"><a href="#">All top-list</a></div>
+					</div><!-- top-players -->
+				</aside><!-- left-sidebar -->
+           <!-- <button data-balloon="HTML special characters: &#9787; &#9986; &#9820;" data-balloon-pos="up">Hover me!</button> -->
+				<main class="content">
+                    {%  if not session['username'] %}
+                        {%  block login %}
+                        {%  endblock login %}
+                    {%  endif %}
+                    {% block slider  %}
+                    {% endblock slider %}
+                    {%  block content %}
+                    {% endblock content %}
+				</main>
+
+				<!-- .content -->
+				<aside class="right-sidebar">
+                    {%  if  not session['username']  %}
+				<div class="server-block">
+						<div class="server server-1">
+							<div class="title-server">
+								Server x15
+							</div>
+							<div class="server-info online">
+								<i></i> <span>5468</span> (EX700)
+							</div>
+						</div>
+						<div class="server server-2">
+							<div class="title-server">
+								Server x30
+							</div>
+							<div class="server-info online">
+								<i></i> <span>468</span> (EX700)
+							</div>
+						</div>
+						<div class="server server-3">
+							<div class="title-server">
+								Server x50
+							</div>
+							<div class="server-info offline">
+								<i></i> <span>0</span> (EX700)
+							</div>
+						</div>
+					</div><!-- server-block -->
+                    {%  else %}
+                    <div class="welcome-user"><i class="fas fa-user fa-1x"></i> Welcome  {{  session['username'] }}</div>
+                        <div class="welcome-user-separator"></div>
+                           <div class="menu-right-coins">
+                                <span><img src="/static/default-images/items/14/21.gif"> 56 </span>
+                                <span><img src="/static/default-images/items/14/21-1.gif"> 12</span>
+                                <span><img src="/static/default-images/items/14/27.gif"> 4</span>
+                                <span><img src="/static/default-images/items/14/21-3.gif"> 5</span>
+                                <span><img src="/static/default-images/items/14/21-2.gif"> 0</span>
+                                <span><img src="/static/default-images/items/14/13.gif"> 40</span>
+                                <span><img src="/static/default-images/items/14/12-1.gif"> 52</span>
+                                <span><img src="/static/default-images/items/14/16.gif"> 2</span>
+                           </div>
+                       <div class="menu-right">
+                	        <ul>
+                	        	<li><a href="my-account">Account</a></li>
+                	        	<li><a href="my-characters">Characters</a></li>
+                                <li><a href="vip-modules">Vip Modules</a></li>
+                                <li><a href="buy-credits">Buy Credits</a></li>
+                                <li><a href="my-market">Market</a></li>
+                                <li><a href="my-auction">Auction</a></li>
+                                <li><a href="logout">Logout</a></li>
+                	        	<li class="cursor-menu-right"></li>
+                	        </ul>
+                	   </div>
+                   {%  endif %}
+					<div class="castle-block">
+						<div class="sidebar-title">
+							CASTLE
+						</div>
+						<div class="castle-name">
+							<img src="/static/themes-media/Dark-Angel/images/ava.png" alt=""> <a href="#">Clan Lords</a>
+						</div>
+						<div class="clan-status clan">
+							<span>Registration</span> Status:
+						</div>
+						<div class="clan">
+							<span>12.11.2018</span> Starting period:
+						</div>
+						<div class="clan">
+							<span>18.12.2018</span> Ending period:
+						</div>
+					</div><!-- castle-block -->
+					<div class="themes-block">
+						<div class="sidebar-title themes-sidebar-title">
+							LAST THEMES
+						</div>
+						<div class="themes">
+							<a href="#" class="themes-title">Unique teamgame events every day</a>
+							by <a href="#" class="author">Admin</a>, today at 12:45
+						</div>
+						<div class="themes">
+							<a href="#" class="themes-title">Violations of the rules and penalties</a>
+							by <a href="#" class="author">Incvizitor</a>, today at 12:45
+						</div>
+						<div class="themes">
+							<a href="#" class="themes-title">Event: “Castle Battle”</a>
+							by <a href="#" class="author">Shakal</a>, today at 12:45
+						</div>
+						<div class="themes">
+							<a href="#" class="themes-title">Why had bunned my account?</a>
+							by <a href="#" class="author">Banned</a>, today at 12:45
+						</div>
+					</div><!-- themes-block -->
+				</aside><!-- right-sidebar -->
+			</div><!-- .container-->
+
+		<footer class="footer">
+			<div class="counters">
+				<a href="#"><img src="/static/themes-media/Dark-Angel/images/counter-img.png" alt=""></a> <a href="#"><img src="/static/themes-media/Dark-Angel/images/counter-img.png" alt=""></a>
+			</div>
+			<div class="copyright">
+				{{ author }}
+			</div>
+		</footer><!-- .footer -->
+
+	</div><!-- .wrapper -->
+	<script>
+		$('.btn-block').click(function(){
+			$('.btn-block').removeClass('active');
+			$(this).addClass('active');
+			$('.block').removeClass('active');
+			$('#'+$(this).attr('data-tab')).addClass('active');
+		})
+	</script>
+</div>
+</body>
+</html>
+                <script>
+                    (function () {
+                        function checkTime(i) {
+                            return (i < 10) ? "0" + i : i;
+                        }
+
+                        function startTime() {
+                            var today = new Date(),
+                                h = checkTime(today.getHours()),
+                                m = checkTime(today.getMinutes()),
+                                s = checkTime(today.getSeconds());
+                            document.getElementById('time').innerHTML = h + ":" + m + ":" + s;
+                            t = setTimeout(function () {
+                                startTime()
+                            }, 500);
+                        }
+                        startTime();
+                    })();
+                </script>
